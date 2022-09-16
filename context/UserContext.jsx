@@ -17,11 +17,12 @@ export const UserProvider = ({ children }) => {
   const checkLogin = () => {
     if (!user.token) {
       logout()
-      return
+      return 'logout'
     }
     // Check if jwt expired
     if (jwtDecode(user.token).exp <= Date.now() / 1000) {
       logout('Your session has expired')
+      return 'logout'
     }
   }
 
@@ -33,6 +34,19 @@ export const UserProvider = ({ children }) => {
     return
   }
 
+  const authFetch = async (...args) => {
+    if (checkLogin() === 'logout') {
+      return
+    }
+    const result = await fetch(...args).catch((err) => console.log(err))
+    const data = await result.json()
+    if (data === 'Invalid Token') {
+      logout('Your Session has expired.')
+      return 'logout'
+    }
+    return data
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -41,6 +55,7 @@ export const UserProvider = ({ children }) => {
         checkLogin,
         message,
         logout,
+        authFetch,
       }}>
       {children}
     </UserContext.Provider>

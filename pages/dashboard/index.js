@@ -13,7 +13,7 @@ const FormStyles = styled.form`
 `
 
 export default function Dashboard(props) {
-    const { user, checkLogin } = useContext(UserContext)
+    const { user, checkLogin, logout, authFetch } = useContext(UserContext)
 
     const [refreshEntries, setRefreshEntries] = useState(true)
 
@@ -29,7 +29,7 @@ export default function Dashboard(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch(`${process.env.SERVER_URL}/entries`,
+            const res = await authFetch(`${process.env.SERVER_URL}/entries`,
                 {
                     method: 'GET',
                     headers: {
@@ -37,8 +37,10 @@ export default function Dashboard(props) {
                     },
                 },
             )
-            const data = await res.json()
-            setEntries(data.entries)
+            if (res !== 'logout') {
+                setEntries(res?.entries)
+            }
+
         }
         if (refreshEntries) {
             fetchData().catch(console.error)
@@ -49,9 +51,8 @@ export default function Dashboard(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("submition", submition)
         try {
-            const res = await fetch(`${process.env.SERVER_URL}/entries`, {
+            authFetch(`${process.env.SERVER_URL}/entries`, {
                 method: 'POST',
                 body: JSON.stringify(submition),
                 headers: {
@@ -59,12 +60,11 @@ export default function Dashboard(props) {
                     'Content-Type': "application/json"
                 },
             })
-            const data = await res.json()
-            console.log(data)
-            setRefreshEntries(true)
-        } catch (err) {
-            console.log(err);
+        } catch (error) {
+            console.log(error);
         }
+
+        setRefreshEntries(true)
 
     }
 
@@ -94,14 +94,3 @@ export default function Dashboard(props) {
         </Layout>
     )
 }
-
-// export const getServerSideProps = async (ctx) => {
-//     const res = await fetch(`${process.env.SERVER_URL}/entries/`, {
-//         method: 'GET',
-//         headers: {
-//             token: ctx.req.cookies['access_token']
-//         }
-//     })
-//     const json = await res.json()
-//     return { props: json }
-// }

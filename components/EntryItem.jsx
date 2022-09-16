@@ -22,13 +22,13 @@ const EntryStyles = styled.div`
 `
 
 export default function EntryItem({ entry, setRefreshEntries }) {
-  const { user, message } = useContext(UserContext)
+  const { user, message, authFetch } = useContext(UserContext)
 
   const handleDelete = async () => {
     try {
       const body = { id: entry.article_id }
 
-      const res = await fetch(`${process.env.SERVER_URL}/entries`, {
+      const res = await authFetch(`${process.env.SERVER_URL}/entries`, {
         method: 'DELETE',
         body: JSON.stringify(body),
         headers: {
@@ -36,7 +36,6 @@ export default function EntryItem({ entry, setRefreshEntries }) {
           'Content-Type': 'application/json',
         },
       })
-      const data = await res.json()
       setRefreshEntries(true)
       console.log('deleted!')
     } catch (err) {
