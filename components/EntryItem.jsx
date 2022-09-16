@@ -22,12 +22,9 @@ const EntryStyles = styled.div`
 `
 
 export default function EntryItem({ entry, setRefreshEntries }) {
-  const { user, checkLogin } = useContext(UserContext)
+  const { user, message } = useContext(UserContext)
 
   const handleDelete = async () => {
-    if (checkLogin()) {
-      return
-    }
     try {
       const body = { id: entry.article_id }
 
@@ -40,7 +37,6 @@ export default function EntryItem({ entry, setRefreshEntries }) {
         },
       })
       const data = await res.json()
-      console.log(data)
       setRefreshEntries(true)
       console.log('deleted!')
     } catch (err) {

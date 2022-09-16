@@ -9,19 +9,28 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage({
     token: '',
   })
+
+  // Message to be displayed on login screen
   const [message, setMessage] = useState('')
 
+  // check if the user has a valid jwt. If not,logout
   const checkLogin = () => {
-    const decoded = jwtDecode(user.token)
     if (!user.token) {
-      Router.push('/')
+      logout()
+      return
     }
-    if (decoded.exp <= Date.now() / 1000) {
-      console.log('it expired')
-      setUser({ token: '' })
-      Router.push('/')
-      return true
+    // Check if jwt expired
+    if (jwtDecode(user.token).exp <= Date.now() / 1000) {
+      logout('Your session has expired')
     }
+  }
+
+  // logout user
+  const logout = (msg = 'You have been logged out') => {
+    setUser({ token: '' })
+    setMessage(msg)
+    Router.push('/')
+    return
   }
 
   return (
@@ -31,6 +40,7 @@ export const UserProvider = ({ children }) => {
         setUser,
         checkLogin,
         message,
+        logout,
       }}>
       {children}
     </UserContext.Provider>

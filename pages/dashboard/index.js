@@ -3,6 +3,7 @@ import EntryItem from '../../components/EntryItem'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext'
+import Layout from '../../components/Layout'
 
 const FormStyles = styled.form`
     width: 100%;
@@ -12,7 +13,7 @@ const FormStyles = styled.form`
 `
 
 export default function Dashboard(props) {
-    const { user } = useContext(UserContext)
+    const { user, checkLogin } = useContext(UserContext)
 
     const [refreshEntries, setRefreshEntries] = useState(true)
 
@@ -23,6 +24,8 @@ export default function Dashboard(props) {
         notes: ''
     })
     const [entries, setEntries] = useState(["blank"])
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -73,8 +76,7 @@ export default function Dashboard(props) {
     }
 
     return (
-        <div>
-            <div>Dashboard Secure</div>
+        <Layout>
             <FormStyles onSubmit={(e) => handleSubmit(e)}>
                 <label htmlFor='content'>Event</label>
                 <input type="text" id='content' onChange={(e) => handleChange('content', e)}></input>
@@ -89,7 +91,7 @@ export default function Dashboard(props) {
                     <EntryItem key={index} entry={entry} setRefreshEntries={setRefreshEntries}></EntryItem>
                 )
             })}
-        </div>
+        </Layout>
     )
 }
 

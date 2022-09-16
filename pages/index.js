@@ -12,10 +12,13 @@ const LoginStyles = styled.div`
     display: flex;
     flex-direction: column;
   }
+  .message {
+    color: #d30000
+  }
 `
 
 export default function Home() {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser, message } = useContext(UserContext)
 
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("")
@@ -69,6 +72,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LoginStyles>
+        {/* <p className="message">{message}</p> */}
         <form className='login-form' onSubmit={(e) => handleSubmit(e)}>
           <label>Email</label>
           <input type="text" onChange={(e) => handleUsername(e)} />
