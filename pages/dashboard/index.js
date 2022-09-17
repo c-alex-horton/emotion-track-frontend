@@ -40,13 +40,12 @@ export default function Dashboard(props) {
             if (res !== 'logout') {
                 setEntries(res?.entries)
             }
-
         }
         if (refreshEntries) {
             fetchData().catch(console.error)
         }
         setRefreshEntries(false)
-    }, [refreshEntries])
+    }, [refreshEntries, authFetch, user])
 
 
     const handleSubmit = async (e) => {
@@ -65,6 +64,12 @@ export default function Dashboard(props) {
         }
 
         setRefreshEntries(true)
+        setSubmition({
+            content: '',
+            emotion: '',
+            flagged: false,
+            notes: ''
+        })
 
     }
 
@@ -78,17 +83,44 @@ export default function Dashboard(props) {
     return (
         <Layout>
             <FormStyles onSubmit={(e) => handleSubmit(e)}>
-                <label htmlFor='content'>Event</label>
-                <input type="text" id='content' onChange={(e) => handleChange('content', e)}></input>
-                <label htmlFor="emotion">Emotion</label>
-                <input type="text" id='emotion' onChange={(e) => handleChange('emotion', e)} />
-                <label htmlFor="notes">Notes</label>
-                <textarea type="text" id='notes' onChange={(e) => handleChange('notes', e)}></textarea>
+                <label htmlFor='content'>
+                    Event
+                </label>
+                <input
+                    type="text"
+                    id='content'
+                    value={submition.content || ''}
+                    required
+                    onChange={(e) => handleChange('content', e)}>
+                </input>
+                <label htmlFor="emotion">
+                    Emotion
+                </label>
+                <input
+                    type="text"
+                    id='emotion'
+                    required
+                    value={submition.emotion || ''}
+                    onChange={(e) => handleChange('emotion', e)}
+                />
+                <label htmlFor="notes">
+                    Notes
+                </label>
+                <textarea
+                    type="text"
+                    id='notes'
+                    value={submition.notes || ''}
+                    onChange={(e) => handleChange('notes', e)}>
+                </textarea>
                 <input type="submit" value="Submit"></input>
             </FormStyles>
             {entries?.map((entry, index) => {
                 return (
-                    <EntryItem key={index} entry={entry} setRefreshEntries={setRefreshEntries}></EntryItem>
+                    <EntryItem
+                        key={index}
+                        entry={entry}
+                        setRefreshEntries={setRefreshEntries}>
+                    </EntryItem>
                 )
             })}
         </Layout>
