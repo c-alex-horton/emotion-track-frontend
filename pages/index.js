@@ -50,6 +50,7 @@ export default function Home() {
       if (response.status === 200) {
         setUser({
           token: data.token,
+          refreshToken: data.refreshToken,
           name: data.name
         })
         Router.push("/dashboard")

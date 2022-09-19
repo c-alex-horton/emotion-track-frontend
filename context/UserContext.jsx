@@ -8,6 +8,8 @@ export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage({
     token: '',
+    refreshToken: '',
+    name: '',
   })
 
   // Message to be displayed on login screen
