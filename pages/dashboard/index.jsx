@@ -16,7 +16,7 @@ export default function Dashboard(props) {
   const { user, checkLogin, logout, authFetch } = useContext(UserContext)
 
   const [refreshEntries, setRefreshEntries] = useState(true)
-
+  const [name, setName] = useState('!')
   const [submition, setSubmition] = useState({
     content: '',
     emotion: '',
@@ -24,6 +24,11 @@ export default function Dashboard(props) {
     notes: '',
   })
   const [entries, setEntries] = useState(['blank'])
+
+  //This is to prevent a Nextjs Hydration error, fetching from local storage on useEffect
+  useEffect(() => {
+    setName(user.name)
+  }, [user])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,7 +82,7 @@ export default function Dashboard(props) {
 
   return (
     <Layout>
-      <h1>Hello, {user?.name}</h1>
+      <h1>Hello, {name}!</h1>
       <FormStyles onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor='content'>Event</label>
         <input
