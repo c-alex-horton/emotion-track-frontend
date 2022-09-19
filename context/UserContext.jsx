@@ -44,6 +44,7 @@ export const UserProvider = ({ children }) => {
       logout('Your Session has expired.')
       return 'logout'
     }
+
     return data
   }
 

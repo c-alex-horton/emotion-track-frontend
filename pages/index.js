@@ -12,8 +12,11 @@ const LoginStyles = styled.div`
     display: flex;
     flex-direction: column;
   }
+  justify-content: center;
+  flex-direction: column;
   .message {
-    color: #d30000
+    color: #d30000;
+    text-align: center;
   }
 `
 
@@ -46,7 +49,8 @@ export default function Home() {
       console.log(data)
       if (response.status === 200) {
         setUser({
-          token: data.token
+          token: data.token,
+          name: data.name
         })
         Router.push("/dashboard")
       }
@@ -72,7 +76,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LoginStyles>
-        {/* <p className="message">{message}</p> */}
+        <p className="message">{message}</p>
         <form className='login-form' onSubmit={(e) => handleSubmit(e)}>
           <label>Email</label>
           <input type="text" onChange={(e) => handleUsername(e)} />
