@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import styled from 'styled-components'
+import { format, parseISO } from 'date-fns'
 
 const EntryStyles = styled.div`
   flex-direction: column;
@@ -23,7 +24,7 @@ const EntryStyles = styled.div`
 `
 
 export default function EntryItem({ entry, setRefreshEntries }) {
-  const { user, message, authFetch } = useContext(UserContext)
+  const { user, authFetch } = useContext(UserContext)
 
   const handleDelete = async () => {
     try {
@@ -49,6 +50,9 @@ export default function EntryItem({ entry, setRefreshEntries }) {
       <h1>{entry.content}</h1>
       <h2>Emotion: {entry.emotion}</h2>
       <p>{entry.notes}</p>
+      <p>
+        {entry?.date && format(parseISO(entry?.date), 'MMM, d, y - h:mm aaaa')}
+      </p>
       <div className='close' onClick={handleDelete}>
         X
       </div>
