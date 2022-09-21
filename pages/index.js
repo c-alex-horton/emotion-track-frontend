@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styled from 'styled-components'
 import Layout from '../components/Layout'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Router, { useRouter } from 'next/router'
 import { UserContext } from '../context/UserContext'
 
@@ -25,6 +25,13 @@ export default function Home() {
 
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("")
+
+  useEffect(() => {
+    if (user.token !== '') {
+      Router.push('/dashboard')
+    }
+  }, [user])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

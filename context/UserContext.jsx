@@ -38,14 +38,17 @@ export const UserProvider = ({ children }) => {
   }
 
   const authFetch = async (...args) => {
-    console.log(args)
     let result = await fetch(args[0], {
       ...args[1],
       headers: {
         token: user.token,
         'Content-Type': 'application/json',
       },
-    }).catch((err) => console.log(err))
+    }).catch((err) => {
+      if (err.status !== 401) {
+        console.log(err)
+      }
+    })
     let data = await result.json()
     if (data === 'Invalid Token') {
       let refreshResult = await fetch(`${process.env.SERVER_URL}/auth/token`, {
