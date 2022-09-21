@@ -10,6 +10,19 @@ const FormStyles = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
+  .text {
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    border-width: 1px;
+  }
+  .textbox {
+    width: 90%;
+    font-size: 1em;
+    border-radius: 5px;
+    padding: 5px;
+  }
 `
 
 export default function Dashboard(props) {
@@ -53,7 +66,7 @@ export default function Dashboard(props) {
     try {
       const res = await authFetch(`${process.env.SERVER_URL}/entries`, {
         method: 'POST',
-        body: JSON.stringify(submition),
+        body: JSON.stringify({ ...submition, date: Date.now() }),
         headers: {
           token: user.token,
           'Content-Type': 'application/json',
@@ -70,6 +83,7 @@ export default function Dashboard(props) {
       emotion: '',
       flagged: false,
       notes: '',
+      date: '',
     })
   }
 
@@ -87,6 +101,7 @@ export default function Dashboard(props) {
         <label htmlFor='content'>Event</label>
         <input
           type='text'
+          className='text'
           id='content'
           value={submition.content || ''}
           required
@@ -95,6 +110,7 @@ export default function Dashboard(props) {
         <input
           type='text'
           id='emotion'
+          className='text'
           required
           value={submition.emotion || ''}
           onChange={(e) => handleChange('emotion', e)}
@@ -103,6 +119,7 @@ export default function Dashboard(props) {
         <textarea
           type='text'
           id='notes'
+          className='textbox'
           value={submition.notes || ''}
           onChange={(e) => handleChange('notes', e)}></textarea>
         <input type='submit' value='Submit'></input>

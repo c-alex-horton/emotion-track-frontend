@@ -9,6 +9,7 @@ const EntryStyles = styled.div`
   margin: 5px;
   padding: 5px;
   position: relative;
+  color: white;
   h2 {
     font-size: 1.2em;
     margin: 0;
