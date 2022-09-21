@@ -10,6 +10,7 @@ export const UserProvider = ({ children }) => {
     token: '',
     refreshToken: '',
     name: '',
+    user: '',
   })
 
   // Message to be displayed on login screen
@@ -37,14 +38,49 @@ export const UserProvider = ({ children }) => {
   }
 
   const authFetch = async (...args) => {
-    if (checkLogin() === 'logout') {
-      return
-    }
-    const result = await fetch(...args).catch((err) => console.log(err))
-    const data = await result.json()
+    console.log(args)
+    let result = await fetch(args[0], {
+      ...args[1],
+      headers: {
+        token: user.token,
+        'Content-Type': 'application/json',
+      },
+    }).catch((err) => console.log(err))
+    let data = await result.json()
     if (data === 'Invalid Token') {
-      logout('Your Session has expired.')
-      return 'logout'
+      let refreshResult = await fetch(`${process.env.SERVER_URL}/auth/token`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:3000',
+          'Access-Allow-Methods': 'POST',
+          // 'Access-Control-Allow-Credentials': 'true',
+        },
+        body: JSON.stringify({
+          userId: user.userId,
+          refreshToken: user.refreshToken,
+        }),
+      })
+      if (refreshResult.status === 200) {
+        const refreshData = await refreshResult.json()
+        setUser({
+          ...user,
+          refreshToken: refreshData.newRefresh,
+          token: refreshData.newAccess,
+        })
+        result = await fetch(args[0], {
+          ...args[1],
+          headers: {
+            token: refreshData.newAccess,
+            'Content-Type': 'application/json',
+          },
+        }).catch((err) => console.log(err))
+        let data = await result.json()
+        console.log('Refresh Successful!')
+      } else {
+        logout('Your Session has expired.')
+        return 'logout'
+      }
     }
 
     return data

@@ -46,13 +46,9 @@ export default function Home() {
       })
 
       const data = await response.json()
-      console.log(data)
       if (response.status === 200) {
-        setUser({
-          token: data.token,
-          refreshToken: data.refreshToken,
-          name: data.name
-        })
+        setUser(data)
+
         Router.push("/dashboard")
       }
     } catch (err) {
