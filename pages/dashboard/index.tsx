@@ -9,7 +9,8 @@ const mockData = [
     entries: [
       {
         event: 'Ate too much',
-        emotion: 'dissapointed',
+        symbol: 'neutral',
+        emotion: 'gross',
         notes: 'I should have stopped but I kept going',
         time: '2022-10-05 19:07:05',
         tags: [],
@@ -17,7 +18,17 @@ const mockData = [
       },
       {
         event: 'Ditched Work',
+        symbol: 'neutral',
         emotion: 'dissapointed',
+        notes: 'I just couldnt make myself',
+        time: '2022-10-05 09:07:05',
+        tags: [],
+        starred: true,
+      },
+      {
+        event: 'Finished Project',
+        symbol: 'happy',
+        emotion: 'happy',
         notes: 'I just couldnt make myself',
         time: '2022-10-05 09:07:05',
         tags: [],
@@ -30,6 +41,7 @@ const mockData = [
     entries: [
       {
         event: 'Fought with Spouse',
+        symbol: 'sad',
         emotion: 'sad',
         notes:
           'We fought about dishes. It was stupid and I got more angry than I should have.',
