@@ -1,7 +1,8 @@
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Container, Spacer } from '@chakra-ui/react'
 import React from 'react'
 import DayBlock from '../../components/DayBlock'
 import Nav from '../../components/Nav'
+import Toolbar from '../../components/Toolbar'
 
 const mockData = [
   {
@@ -171,6 +172,8 @@ export const index = () => {
           return <DayBlock key={index} date={day.date} entries={day.entries} />
         })}
       </Container>
+      <Box h={'5rem'} />
+      <Toolbar />
     </Box>
   )
 }
