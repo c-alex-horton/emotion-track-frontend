@@ -8,30 +8,35 @@ const mockData = [
     date: '2022-10-05',
     entries: [
       {
-        event: 'Ate too much',
+        event: 'Havent showered in 3 days',
         symbol: 'neutral',
         emotion: 'gross',
-        notes: 'I should have stopped but I kept going',
+        description: 'I havent been able to make myself.',
+        notes:
+          "I finally showered tonight, and i feel better, but I know I'm going to do it again",
         time: '2022-10-05 19:07:05',
-        tags: [],
+        tags: ['Self-Care', 'Neglect', 'Guilt'],
         starred: false,
       },
       {
         event: 'Ditched Work',
         symbol: 'neutral',
         emotion: 'dissapointed',
+        description: 'I tried getting dressed but I just called in.',
         notes: 'I just couldnt make myself',
         time: '2022-10-05 09:07:05',
-        tags: [],
+        tags: ['Responisibility', 'Apathy', 'Work'],
         starred: true,
       },
       {
         event: 'Finished Project',
         symbol: 'happy',
         emotion: 'happy',
-        notes: 'I just couldnt make myself',
+        description:
+          'Finally finished the website ive been working on for 3 months!',
+        notes: 'I feel a high right now thats still going the next day.',
         time: '2022-10-05 09:07:05',
-        tags: [],
+        tags: ['Work', 'Responsibility', 'Excitement', 'Proud'],
         starred: true,
       },
     ],
@@ -43,10 +48,114 @@ const mockData = [
         event: 'Fought with Spouse',
         symbol: 'sad',
         emotion: 'sad',
-        notes:
-          'We fought about dishes. It was stupid and I got more angry than I should have.',
+        description: 'We fought about dishes.',
+        notes: 'It was stupid and I got more angry than I should have.',
         time: '2022-10-05 19:07:05',
-        tags: [],
+        tags: ['Relationship', 'Self-Control'],
+        starred: true,
+      },
+    ],
+  },
+  {
+    date: '2022-10-05',
+    entries: [
+      {
+        event: 'Havent showered in 3 days',
+        symbol: 'neutral',
+        emotion: 'gross',
+        description: 'I havent been able to make myself.',
+        notes:
+          "I finally showered tonight, and i feel better, but I know I'm going to do it again",
+        time: '2022-10-05 19:07:05',
+        tags: ['Self-Care', 'Neglect', 'Guilt'],
+        starred: false,
+      },
+      {
+        event: 'Ditched Work',
+        symbol: 'neutral',
+        emotion: 'dissapointed',
+        description: 'I tried getting dressed but I just called in.',
+        notes: 'I just couldnt make myself',
+        time: '2022-10-05 09:07:05',
+        tags: ['Responisibility', 'Apathy', 'Work'],
+        starred: true,
+      },
+      {
+        event: 'Finished Project',
+        symbol: 'happy',
+        emotion: 'happy',
+        description:
+          'Finally finished the website ive been working on for 3 months!',
+        notes: 'I feel a high right now thats still going the next day.',
+        time: '2022-10-05 09:07:05',
+        tags: ['Work', 'Responsibility', 'Excitement', 'Proud'],
+        starred: true,
+      },
+    ],
+  },
+  {
+    date: '2022-10-06',
+    entries: [
+      {
+        event: 'Fought with Spouse',
+        symbol: 'sad',
+        emotion: 'sad',
+        description: 'We fought about dishes.',
+        notes: 'It was stupid and I got more angry than I should have.',
+        time: '2022-10-05 19:07:05',
+        tags: ['Relationship', 'Self-Control'],
+        starred: true,
+      },
+    ],
+  },
+  {
+    date: '2022-10-05',
+    entries: [
+      {
+        event: 'Havent showered in 3 days',
+        symbol: 'neutral',
+        emotion: 'gross',
+        description: 'I havent been able to make myself.',
+        notes:
+          "I finally showered tonight, and i feel better, but I know I'm going to do it again",
+        time: '2022-10-05 19:07:05',
+        tags: ['Self-Care', 'Neglect', 'Guilt'],
+        starred: false,
+      },
+      {
+        event: 'Ditched Work',
+        symbol: 'neutral',
+        emotion: 'dissapointed',
+        description: 'I tried getting dressed but I just called in.',
+        notes: 'I just couldnt make myself',
+        time: '2022-10-05 09:07:05',
+        tags: ['Responisibility', 'Apathy', 'Work'],
+        starred: true,
+      },
+      {
+        event: 'Finished Project',
+        symbol: 'happy',
+        emotion: 'happy',
+        description:
+          'Finally finished the website ive been working on for 3 months!',
+        notes: 'I feel a high right now thats still going the next day.',
+        time: '2022-10-05 09:07:05',
+        tags: ['Work', 'Responsibility', 'Excitement', 'Proud'],
+        starred: true,
+      },
+    ],
+  },
+  {
+    date: '2022-10-06',
+    entries: [
+      {
+        event: 'Fought with Spouse',
+        symbol: 'sad',
+        emotion: 'sad',
+        description: 'We fought about dishes.',
+        notes: 'It was stupid and I got more angry than I should have.',
+        time: '2022-10-05 19:07:05',
+        tags: ['Relationship', 'Self-Control'],
         starred: true,
       },
     ],
@@ -55,9 +164,9 @@ const mockData = [
 
 export const index = () => {
   return (
-    <Box>
+    <Box position={'relative'}>
       <Nav />
-      <Container maxW={'container.xl'}>
+      <Container maxW={'container.md'}>
         {mockData.map((day, index) => {
           return <DayBlock key={index} date={day.date} entries={day.entries} />
         })}

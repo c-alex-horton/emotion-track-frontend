@@ -16,7 +16,7 @@ import {
 
 const Nav = () => {
   return (
-    <Box bg='blue.300'>
+    <Box bg='blue.300' position={'sticky'} top='0' zIndex={'banner'}>
       <Container maxW={'container.lg'} h={'3rem'} color='white'>
         <Flex align={'center'} h={'full'} justify='space-between'>
           <IconButton

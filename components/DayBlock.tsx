@@ -5,15 +5,7 @@ import EntryItem from './EntryItem'
 
 type Props = {
   date: string
-  entries: {
-    event: string
-    symbol: string
-    emotion: string
-    notes: string
-    time: string
-    tags: string[]
-    starred: boolean
-  }[]
+  entries: Entry[]
 }
 
 const DayBlock = ({ date, entries }: Props) => {

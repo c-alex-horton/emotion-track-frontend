@@ -5,15 +5,7 @@ import EntryModal from './EntryModal'
 import symbols from '../util/Symbols'
 
 type Props = {
-  entry: {
-    event: string
-    symbol: string
-    emotion: string
-    notes: string
-    time: string
-    tags: string[]
-    starred: boolean
-  }
+  entry: Entry
 }
 
 const EntryItem = ({ entry }: Props) => {
