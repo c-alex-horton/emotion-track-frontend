@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 import { EditIcon, DeleteIcon, StarIcon } from '@chakra-ui/icons'
 import React from 'react'
-import symbols from '../util/Symbols'
+import symbols from '../../util/Symbols'
 import { format } from 'date-fns'
 
 type Props = {

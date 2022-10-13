@@ -1,8 +1,8 @@
 import { Box, Flex, Text, VStack, Image } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { format } from 'date-fns'
+import { format, parse } from 'date-fns'
 import EntryModal from './EntryModal'
-import symbols from '../util/Symbols'
+import symbols from '../../util/Symbols'
 
 type Props = {
   entry: Entry

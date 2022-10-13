@@ -9,3 +9,5 @@ type Entry = {
     tags: string[]
     starred: boolean
   }
+
+  declare module 'react-datetime-picker/dist/entry.nostyle';

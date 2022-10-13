@@ -53,7 +53,7 @@ const Home: NextPage = () => {
                   placeholder='Email'
                   variant='flushed'
                   color='white'
-                  _placeholder={{ color: 'inherit' }}
+                  _placeholder={{ color: 'white' }}
                   maxWidth='md'
                 />
                 <Input
