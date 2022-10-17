@@ -5,7 +5,7 @@ type Entry = {
     description: string
     emotion: string
     notes: string
-    time: string
+    time: number
     tags: string[]
     starred: boolean
   }

@@ -12,7 +12,6 @@ export const index = () => {
   return (
     <Box position={'relative'}>
       <Nav />
-      <CreateEntryModal />
       <Container maxW={'container.md'}>
         {mockData.map((day, index) => {
           return <DayBlock key={index} date={day.date} entries={day.entries} />

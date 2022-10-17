@@ -15,18 +15,18 @@ import {
   FormLabel,
   Textarea,
 } from '@chakra-ui/react'
-import { EditIcon, DeleteIcon, StarIcon } from '@chakra-ui/icons'
+import { EditIcon, DeleteIcon, StarIcon, CheckIcon } from '@chakra-ui/icons'
 import EmotionSelector from './emotion_selector/EmotionSelector'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
+  onSave: () => void
 }
 
-const CreateEntryModal = ({ isOpen, onClose }: Props) => {
-  // const time = Date.now()
+const CreateEntryModal = ({ isOpen, onClose, onSave }: Props) => {
   return (
-    <Modal isOpen={true} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
         <ModalContent py={1} mx='3'>
           <ModalHeader>Create New Entry</ModalHeader>
@@ -50,22 +50,24 @@ const CreateEntryModal = ({ isOpen, onClose }: Props) => {
             </VStack>
             <Flex pt={'10'} justifyContent='space-between'>
               <IconButton
+                onClick={onClose}
                 aria-label='Delete Entry'
                 backgroundColor={'white'}
                 color='gray.500'>
                 <DeleteIcon />
               </IconButton>
               <IconButton
-                aria-label='Edit Entry'
+                aria-label='Star Entry'
                 backgroundColor={'white'}
                 color='gray.500'>
                 <StarIcon />
               </IconButton>
               <IconButton
-                aria-label='Edit Entry'
+                onClick={onSave}
+                aria-label='Create Entry'
                 backgroundColor={'white'}
                 color='gray.500'>
-                <EditIcon />
+                <CheckIcon />
               </IconButton>
             </Flex>
           </ModalBody>
